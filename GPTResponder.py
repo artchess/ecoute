@@ -8,7 +8,7 @@ openai.api_key = OPENAI_API_KEY
 def generate_response_from_transcript(transcript):
     try:
         response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo-0301",
+                model="gpt-3.5-turbo-1106",
                 messages=[{"role": "system", "content": create_prompt(transcript)}],
                 temperature = 0.0
         )
@@ -24,7 +24,7 @@ def generate_response_from_transcript(transcript):
 def generate_translate_from_transcript(transcript):
     try:
         response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo-0301",
+                model="gpt-3.5-turbo-1106",
                 messages=[{"role": "system", "content": create_translate_prompt(transcript)}],
                 temperature = 0.0
         )
