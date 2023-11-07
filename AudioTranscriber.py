@@ -59,6 +59,8 @@ class AudioTranscriber:
 
             if text != '' and text.lower() != 'you':
                 self.update_transcript(who_spoke, text, time_spoken)
+                #self.transcript_changed_event.set()
+            if who_spoke == "You":
                 self.transcript_changed_event.set()
 
     def update_last_sample_and_phrase_status(self, who_spoke, data, time_spoken):
@@ -103,6 +105,10 @@ class AudioTranscriber:
             key=lambda x: x[1], reverse=True))
         combined_transcript = combined_transcript[:MAX_PHRASES]
         return "".join([t[0] for t in combined_transcript])
+    
+    def get_user_transcript(self):
+        #obtengo el primer elemento de self.transcript_data["You"] que es el que se acaba de agregar y sustituye "You: " por "" y elimina el salto de linea"
+        return self.transcript_data["You"][0][0].replace("You: ", "").replace("\n", "")  
     
     def clear_transcript_data(self):
         self.transcript_data["You"].clear()

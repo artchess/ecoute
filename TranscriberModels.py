@@ -25,9 +25,11 @@ class WhisperTranscriber:
 class APIWhisperTranscriber:
     def get_transcription(self, wav_file_path):
         try:
+            print("Transcribing audio file: " + wav_file_path)
             with open(wav_file_path, "rb") as audio_file:
                 result = openai.Audio.transcribe("whisper-1", audio_file)
         except Exception as e:
             print(e)
             return ''
+        print("Transcription: " + result['text'].strip())
         return result['text'].strip()
